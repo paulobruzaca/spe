@@ -1,0 +1,31 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: arial;
+}
+
+label,input{
+    width: 100%;
+    display: block;
+    line-height: 30px;
+    height: 30px;
+    outline: none;
+    font-size: 13pt;
+}
+
+form{
+    width: 330px;
+    background-color: rgba(0,0,0,.2);
+    padding: 20px;
+    margin: 30px auto;
+}
+
+input[type="submit"]{
+    margin-top: 10px;
+    cursor: pointer;
+}
+h4{
+    width: 330px;
+    margin: 30px auto;
+    text-align: center;
+}
