@@ -2,56 +2,58 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Usuario extends CI_Controller {
-    /* Verifica seo usuário esta realmente logado.
-    public function checkSession(){
-        if($this->session->userdata('logado') == false){
-            redirect('start');
-        }
-    }
-    */
+
 	public function listar($indice = NULL) {
-        $this->load->model('usuario_model', 'usuario');
-        $data['usuarios'] = $this->usuario->getUsuarios();
-        $this->load->view('includes/header');
-        if($indice == 1){
-            $d['msg'] = "Usuário Cadastrado com Sucesso.";
-            $this->load->view('includes/msg_sucesso', $d);
-        }else if($indice == 2){
-            $d['msg'] = "Erro ao Cadastrar Usuário.";
-            $this->load->view('includes/msg_erro',$d);
-        }else if($indice == 3){
-            $d['msg'] = "Sucesso ao realizar a alteração.";
-            $this->load->view('includes/msg_sucesso',$d);
-        }else if($indice == 4){
-            $d['msg'] = "Erro ao Atualizar Usuário.";
-            $this->load->view('includes/msg_erro',$d);
-        }else if($indice == 5){
-            $d['msg'] = "Foto atualizada.";
-            $this->load->view('includes/msg_sucesso',$d);
-        }else if($indice == 6){
-            $d['msg'] = "Erro ao Atualizar Foto.";
-            $this->load->view('includes/msg_erro',$d);
-        }else if($indice == 7){
-            $d['msg'] = "Senha atualizada.";
-            $this->load->view('includes/msg_sucesso',$d);
-        }else if($indice == 8){
-            $d['msg'] = "Erro ao Atualizar a Senha.";
-            $this->load->view('includes/msg_erro',$d);
-        }else if($indice == 9){
-            $d['msg'] = "Exclusão efetuada com sucesso.";
-            $this->load->view('includes/msg_sucesso',$d);
-        }else if($indice == 10){
-            $d['msg'] = "Erro ao excluir.";
-            $this->load->view('includes/msg_erro',$d);
+        if($this->session->userdata('logado') == true){
+            $this->load->model('usuario_model', 'usuario');
+            $data['usuarios'] = $this->usuario->getUsuarios();
+            $this->load->view('includes/header');
+            if($indice == 1){
+                $d['msg'] = "Usuário Cadastrado com Sucesso.";
+                $this->load->view('includes/msg_sucesso', $d);
+            }else if($indice == 2){
+                $d['msg'] = "Erro ao Cadastrar Usuário.";
+                $this->load->view('includes/msg_erro',$d);
+            }else if($indice == 3){
+                $d['msg'] = "Sucesso ao realizar a alteração.";
+                $this->load->view('includes/msg_sucesso',$d);
+            }else if($indice == 4){
+                $d['msg'] = "Erro ao Atualizar Usuário.";
+                $this->load->view('includes/msg_erro',$d);
+            }else if($indice == 5){
+                $d['msg'] = "Foto atualizada.";
+                $this->load->view('includes/msg_sucesso',$d);
+            }else if($indice == 6){
+                $d['msg'] = "Erro ao Atualizar Foto.";
+                $this->load->view('includes/msg_erro',$d);
+            }else if($indice == 7){
+                $d['msg'] = "Senha atualizada.";
+                $this->load->view('includes/msg_sucesso',$d);
+            }else if($indice == 8){
+                $d['msg'] = "Erro ao Atualizar a Senha.";
+                $this->load->view('includes/msg_erro',$d);
+            }else if($indice == 9){
+                $d['msg'] = "Exclusão efetuada com sucesso.";
+                $this->load->view('includes/msg_sucesso',$d);
+            }else if($indice == 10){
+                $d['msg'] = "Erro ao excluir.";
+                $this->load->view('includes/msg_erro',$d);
+            }
+            $this->load->view('usuarios', $data);
+            $this->load->view('includes/footer');
+        }else{
+            redirect(base_url());
         }
-        $this->load->view('usuarios', $data);
-        $this->load->view('includes/footer');
     }
 
     public function cadastroUsuario(){
-        $this->load->view('includes/header');
-        $this->load->view('cadastroUsuario');
-        $this->load->view('includes/footer');
+        if($this->session->userdata('logado') == true){
+            $this->load->view('includes/header');
+            $this->load->view('cadastroUsuario');
+            $this->load->view('includes/footer');
+        }else{
+            redirect(base_url());
+        }
     }
 
     public function cadastrar(){
@@ -64,11 +66,15 @@ class Usuario extends CI_Controller {
     }
 
     public function editarUsuario($id = NULL){
-        $this->load->model('usuario_model','usuario');
-        $data['usuario'] = $this->usuario->getUsuarios($id);
-        $this->load->view('includes/header');
-        $this->load->view('editarUsuario', $data);
-        $this->load->view('includes/footer');
+        if($this->session->userdata('logado') == true){
+            $this->load->model('usuario_model','usuario');
+            $data['usuario'] = $this->usuario->getUsuarios($id);
+            $this->load->view('includes/header');
+            $this->load->view('editarUsuario', $data);
+            $this->load->view('includes/footer');
+        }else{
+            redirect(base_url());
+        }
     }
 
     public function salvarAlteracao(){
@@ -81,11 +87,15 @@ class Usuario extends CI_Controller {
     }
 
     public function uploadFoto($id = NULL){
-        $this->load->model('usuario_model','usuario');
-        $data['usuario'] = $this->usuario->getUsuarios($id);
-        $this->load->view('includes/header');
-        $this->load->view('fotoUsuario', $data);
-        $this->load->view('includes/footer');
+        if($this->session->userdata('logado') == true){
+            $this->load->model('usuario_model','usuario');
+            $data['usuario'] = $this->usuario->getUsuarios($id);
+            $this->load->view('includes/header');
+            $this->load->view('fotoUsuario', $data);
+            $this->load->view('includes/footer');
+        }else{
+            redirect(base_url());
+        }
     }
 
     public function upload(){
@@ -94,7 +104,7 @@ class Usuario extends CI_Controller {
         $fotoUsuario    = $_FILES['fotoUsuario'];
         $configuracao = array(
            'upload_path'   => './assets/fotos/',
-           'allowed_types' => 'jpg',
+           'allowed_types' => 'jpg|jpeg',
            'file_name'     => $cpf.'.jpg',
            'max_size'      => '5000'
         );
@@ -110,11 +120,15 @@ class Usuario extends CI_Controller {
     }
 
     public function alterarSenha($id = NULL){
-        $this->load->model('usuario_model','usuario');
-        $data['usuario'] = $this->usuario->getUsuarios($id);
-        $this->load->view('includes/header');
-        $this->load->view('alterarSenha', $data);
-        $this->load->view('includes/footer');        
+        if($this->session->userdata('logado') == true){
+            $this->load->model('usuario_model','usuario');
+            $data['usuario'] = $this->usuario->getUsuarios($id);
+            $this->load->view('includes/header');
+            $this->load->view('alterarSenha', $data);
+            $this->load->view('includes/footer');        
+        }else{
+            redirect(base_url());
+        }
     }
 
     public function salvarSenha(){

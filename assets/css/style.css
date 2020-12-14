@@ -23,6 +23,7 @@ form{
 input[type="submit"]{
     margin-top: 10px;
     cursor: pointer;
+    height: 50px;
 }
 
 select{
@@ -129,4 +130,22 @@ tr{
     padding: 20px;
     background-color: red;
     color: white;   
+}
+
+hr{
+    margin-top: 10px;
+}
+.foto{
+    align-items: center;
+    text-align: center;
+}
+
+img{
+    width: 100px;
+}
+
+#acesso{
+    width: 300px;
+    padding: 20px;
+    margin: auto;
 }

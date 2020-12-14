@@ -15,15 +15,33 @@ class Usuario_model extends CI_Model {
         return $this->db->get('usuarios')->result();
     }
 
-    public function cadastrar(){
-        $data['nome'] = $this->input->post('nome');
-        $data['sobrenome'] = $this->input->post('sobrenome');
-        $data['cpf'] = $this->input->post('cpf');
-        $data['email'] = $this->input->post('email');
-        $data['senha'] = MD5($this->input->post('senha'));
-        $data['admin'] = $this->input->post('admin');
+    public function verificaCpf($cpf = NULL){
+        $this->db->where('cpf', $cpf);
+        $cpf = $this->db->get('usuarios')->result();
+        if(count($cpf) > 0){
+            return true;
+        }else if(count($cpf) < 0){
+            return false;
+        }
+    }
 
-        return $this->db->insert('usuarios', $data);
+    public function cadastrar(){
+        $this->db->select('idUsuario');
+        $this->db->where('cpf', $this->input->post('cpf'));
+        $usuario = $this->db->get('usuarios')->result();
+        //Se retornar maior que 0 é que o CPF já esta cadastrado
+        if(count($usuario) > 0){
+            return false;
+        }else{
+            $data['nome'] = $this->input->post('nome');
+            $data['sobrenome'] = $this->input->post('sobrenome');
+            $data['cpf'] = $this->input->post('cpf');
+            $data['email'] = $this->input->post('email');
+            $data['senha'] = MD5($this->input->post('senha'));
+            $data['admin'] = $this->input->post('admin');
+    
+            return $this->db->insert('usuarios', $data);
+        }
     }
 
     public function salvarAlteracao(){

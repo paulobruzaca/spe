@@ -2,11 +2,15 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Start extends CI_Controller {
-	public function index()
-	{
-        $this->load->view('includes/header');
-        $this->load->view('start');
-        $this->load->view('includes/footer');
+
+	public function login(){
+        if($this->session->userdata('logado') == true){
+            redirect('panel');
+        }else{
+            $this->load->view('includes/header');
+            $this->load->view('start');
+            $this->load->view('includes/footer');
+        }
     }
 
     public function access(){
@@ -22,12 +26,21 @@ class Start extends CI_Controller {
             if($data['usuario'][0]->status == 0){
                 echo "<h1>Usuario desativado.<h1>";
             }else{
-                $d['nome'] = $data['usuario'][0]->nome." ".$data['usuario'][0]->sobrenome;
+                //Adionoando dados a Session
                 $d['idUsuario'] = $data['usuario'][0]->idUsuario;
                 $d['admin'] = $data['usuario'][0]->admin;
+                $d['logado'] = true;
                 $this->session->set_userdata($d);
                 redirect('panel');
             }
         }
+    }
+    //Função para destruir a Session
+    public function exit(){
+        $d['idUsuario'] = '';
+        $d['admin'] = '';
+        $d['logado'] = false;
+        $this->session->set_userdata($d);
+        redirect(base_url());
     }
 }
