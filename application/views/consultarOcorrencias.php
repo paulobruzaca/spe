@@ -1,5 +1,5 @@
-<h4>Consultar Registros de Ponto</h4>
-<form action="<?= base_url(); ?>ponto/printPonto" method="post" target="_blank">
+<h4>Consultar Ocorrências</h4>
+<form action="<?= base_url(); ?>ponto/printOcorrencia" method="post" target="_blank">
     <label for="cpf">CPF:</label>
     <input type="text" name="cpf" >
     <label for="dataInicio">Data de Inicio:</label>

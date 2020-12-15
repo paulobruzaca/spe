@@ -13,7 +13,7 @@
     ?>
     
     <a href="<?= base_url();?>ponto/consultarPonto"><button>Consultar Batidas</button></a>
-    <a href="<?= base_url();?>usuario"><button>Consultar Ocorrências</button></a>
+    <a href="<?= base_url();?>ponto/ocorrencias"><button>Consultar Ocorrências</button></a>
     <hr>
     <a href="<?= base_url();?>start/exit"><button>Sair do Sistema</button></a>
 </div>

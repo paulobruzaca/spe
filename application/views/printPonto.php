@@ -19,7 +19,6 @@
             <?php
             $count = 0;
             $acumulo = 0;
-            $somaHE = 0;
             $acumulaHora = 0;
             $acumulaMinuto = 0;
                 foreach($registros as $registro){
@@ -155,24 +154,14 @@
                             </td>
                         </tr>
                     <?php
-                    $aux = explode(':', $horaExtra);
-                    if($aux[0] != '00'){
-                        $acumulaHora += intval($aux[0]);
-                    }
-                    if($aux[1] != '00'){
-                        $acumulaMinuto += intval($aux[1]);
-                    }
-                    
-                    echo $acumulaHora. " ".$acumulaMinuto;
-
                     //Cálculo da quantidade de horas trabalhadas no período.
-                    if($debito == ''){
-                        if($dia == 'Sat'){
-                            $acumulo += 4;
-                        }else{
-                            $acumulo += 8;
+                        if($debito == ''){
+                            if($dia == 'Sat'){
+                                $acumulo += 4;
+                            }else{
+                                $acumulo += 8;
+                            }
                         }
-                    }
                 }
             ?>
         </body>
