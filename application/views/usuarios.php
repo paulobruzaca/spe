@@ -2,6 +2,7 @@
 
 <div class="usuarios">
     <a href="<?= base_url();?>usuario/cadastroUsuario"><button>Cadastrar Usuário</button></a>
+    <a href="<?= base_url();?>panel"><button>Voltar</button></a>
 
     <table id="custom">
         <head>

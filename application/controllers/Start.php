@@ -29,6 +29,7 @@ class Start extends CI_Controller {
                 //Adionoando dados a Session
                 $d['idUsuario'] = $data['usuario'][0]->idUsuario;
                 $d['admin'] = $data['usuario'][0]->admin;
+                $d['status'] = $data['usuario'][0]->status;
                 $d['logado'] = true;
                 $this->session->set_userdata($d);
                 redirect('panel');

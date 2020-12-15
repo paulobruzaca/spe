@@ -17,3 +17,6 @@
     </select>
     <input type="submit" value="Cadastrar">
 </form>
+<div class="voltar">
+    <a href="<?= base_url();?>panel"><button>Voltar</button></a>
+</div>

@@ -11,6 +11,7 @@ class Usuario_model extends CI_Model {
             $this->db->where('idUsuario',$id);
         }else{
             $this->db->select('*');
+            $this->db->where('status', 1);
         }
         return $this->db->get('usuarios')->result();
     }
@@ -66,9 +67,12 @@ class Usuario_model extends CI_Model {
         $this->db->where('idUsuario', $this->input->post('idUsuario'));
         return $this->db->update('usuarios',$data);
     }
-
+    /* O usuário não é excluido, será mudado o status dele para 0 (desativado),
+    * caso seja necessário uma pesquisa futura sobre as informações do mesmo.
+    */
     public function excluir($id = NULL){
         $this->db->where('idUsuario', $id);
-        return $this->db->delete('usuarios');
+        $data['status'] = 0;
+        return $this->db->update('usuarios', $data);
     }
 }
